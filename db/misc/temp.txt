@@ -1,0 +1,53 @@
+
+
+湖西線、山科
+東海道線、京都
+東海道新幹線、新大阪
+山陽新幹線、小倉
+：
+
+埼京線、赤羽           埼京線、赤羽
+東北線、大宮　　　　　 東北線、大宮
+東北新幹線、北上　　　 東北新幹線、新青森
+東北線、盛岡　　　　   奥羽線、青森
+東北新幹線、新青森
+奥羽線、青森
+：
+
+
+nextprev_line = -1
+while id != startnode and 0 < id:
+	if lineid != line_id[id - 1]:
+		if 0 < nextprev_line:
+			if line_id[id - 1] == jrdb.getHZline(nextprev_line, jrdb.station_id_from_id(id)):
+				
+		route.append(id - 1)
+		lineid = line_id[id - 1]
+		if jrdb.is_shinkansen(lineid):
+			nextprev_line = lineid
+		else:
+			nextprev_line = -1
+
+	id = fromNode[id - 1] + 1
+
+(original)
+while id != startnode and 0 < id:
+	if lineid != line_id[id - 1]:
+		route.append(id - 1)
+		lineid = line_id[id - 1]
+	
+	id = fromNode[id - 1] + 1
+
+
+python jroutefinal.py 渋谷 青森
+*               [渋谷        ]         0.0
+山手線          [池袋        ]         8.2
+赤羽線(埼京線)          [赤羽        ]        13.7
+東北線          [大宮        ]        30.8
+東北新幹線      [北上        ]       488.0
+東北線          [盛岡        ]       535.8
+東北新幹線      [新青森       ]       714.0
+奥羽線          [青森        ]       717.9
+
+
+

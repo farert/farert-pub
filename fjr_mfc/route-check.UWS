@@ -1,0 +1,183 @@
+//
+// Route check Test script for UWSC
+// Jul.9, 2012 / SuteZo
+//
+
+//SELECT SLCTBOX(SLCT_BTN, 3, "選択してください", "連続実行", "選択実行(表題先頭文字='*')")
+//　CASE SLCT_1
+//　　FUKIDASI("連続実行します")
+//　　選択実行 = 0
+//　CASE SLCT_2
+//　　FUKIDASI("選択実行します")
+//　　選択実行 = 1
+//　CASE 0
+//　　FUKIDASI("タイムアウトしました")
+//　　選択実行 = -1
+//SELEND
+
+// ↑↓どっちでもよか
+
+dim sel[] = "選択実行(表題先頭文字='*')", "選択実行(表題任意文字)", "連続実行", "連続実行(確認)", "cancel"
+selidx = popupmenu(sel)
+if selidx >= 4 then exitexit
+fukidasi(sel[selidx])
+連続実行 = selidx
+
+Sleep(1)
+FUKIDASI()
+
+if 連続実行 < 0 then exitexit
+
+if 連続実行 = 1 then 
+  runTitle = input("実行する表題の一文字目")
+else
+  runTitle = "*"
+endif
+
+
+/////////////////////////////////
+
+fd = fopen("route-case.txt", F_READ)
+if fd < 0 then
+  msgbox("経路指定ファイル読込エラー")
+  exitexit
+endif
+
+for cnt = 1 to fget(fd, F_LINECOUNT)
+  表題 = fget(fd, cnt, 1)
+  find = pos("#", 表題)
+  if find = 1 then continue
+
+  if 連続実行 <= 1 then
+    c = copy(表題, 1, 1)
+    if c <> runTitle then continue
+  endif
+  
+  結果 = fget(fd, cnt, 2)
+  開始駅 = fget(fd, cnt, 3)
+  終了駅 = fget(fd, cnt, 4)
+
+  if 開始駅 = "" then continue
+  
+  経路 = ""
+  col = 5
+  while True
+    item = fget(fd, cnt, col)
+    if item = "" then break
+
+    if col = 5 then
+      経路 = 経路 + item
+    else
+      経路 = 経路 + "#" + item
+    endif
+    col = col + 1
+  wend
+  
+  res = route_check(表題, 結果, 開始駅, 終了駅, 経路)
+  
+  if 連続実行 <= 2 then
+    find = pos("異常", res)	// Intractive 操作時は、find = 1 とする
+  else
+    find = 1
+  endif
+  if find <> 0 then
+    if msgbox(表題 + "実行結果" + res + "、継続？", BTN_OK or BTN_CANCEL) = BTN_CANCEL then break
+  else
+    //Sleep(2)
+    Sleep(0.3)
+  endif
+next
+fclose(fd)
+msgbox("お疲れ様でした。終りです")
+
+
+FUNCTION route_check(表題, 結果, 開始駅, 終了駅, 経路)
+
+  id = GETID("JR運賃計算", "#32770", -1)
+  CLKITEM(id, "X", CLK_BTN or CLK_LEFTCLK, True, 1)
+  SLEEP(0.2)
+  idd = GETID("選択経路破棄確認", , 1)
+  if 0 < idd then CLKITEM(idd, "はい(Y)", CLK_BTN or CLK_LEFTCLK, True, 1)
+  SLEEP(0.2)
+  ルート指定(開始駅, 終了駅, 経路)
+  SLEEP(0.2)
+  if 結果 = "Complete" then
+  	s = getstr(id, 4, STR_EDIT)
+  	if s = "乗換駅を選択してください." then
+  	  r = "(成功"
+  	else
+  	  r = "(異常"
+  	endif
+  	idr = GETID("経路終端", , 1)
+  	// 経路が片道条件に達しました. 着駅として終了しますか？
+  	if 0 < idr then 
+  	  CLKITEM(idr, "はい(Y)", CLK_BTN or CLK_LEFTCLK, True, 1)
+  	  SLEEP(0.2)
+  	  r = r + "/成功"
+  	else
+  	  r = r + "/異常"
+  	endif
+  	s = getstr(id, 4, STR_EDIT)
+  	if s = "完了" then
+  	  r = r + "/成功)"
+  	else
+  	  r = r + "/異常)"
+  	endif
+  else
+  	s = getstr(id, 4, STR_EDIT)
+  	if 結果 = s then
+  	  r = "成功"
+  	else
+  	  r = "異常"
+  	endif
+  endif
+
+  RESULT = r
+
+FEND
+/////////////////////////////////////////////////////////
+PROCEDURE ルート指定(発駅, 着駅, ルート)
+	id = GETID("JR運賃計算", "#32770", -1)
+	発駅選択(発駅)
+	
+	if 着駅<>"" then 着駅選択(着駅)
+	
+	id = GETID("JR運賃計算", "#32770", -1)
+        while True
+		SLEEP(0.1)
+		routeItem = token("#", ルート)
+		if routeItem = "" then break
+		if copy(routeItem, 1, 1) = "P" then
+		  CLKITEM(id, copy(routeItem, 2), CLK_BTN)
+		  continue
+		endif
+		CLKITEM(id, routeItem, CLK_LSTVEW or CLK_LEFTCLK, True, 1)
+		CLKITEM(id, "+", CLK_BTN)
+	wend
+FEND
+/////////////////////////////////////////////////////////
+PROCEDURE 発駅選択(駅名)
+	id = GETID("JR運賃計算", "#32770", -1)
+	CLKITEM(id, "…", CLK_BTN, True, 1)
+	id = GETID("発着駅指定", "#32770", -1)
+	SENDSTR(id, 駅名, 1, TRUE)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, 駅名, CLK_LIST or CLK_LEFTCLK, True, 4)
+	SLEEP(0.2)
+	KBD(VK_DOWN)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+FEND
+/////////////////////////////////////////////////////////
+PROCEDURE 着駅選択(駅名)
+	id = GETID("JR運賃計算", "#32770", -1)
+	CLKITEM(id, "…", CLK_BTN, True, 2)
+	id = GETID("発着駅指定", "#32770", -1)
+	SENDSTR(id, 駅名, 1, TRUE)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, 駅名, CLK_LIST or CLK_LEFTCLK, True, 4)
+	SLEEP(0.2)
+	KBD(VK_DOWN)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+FEND

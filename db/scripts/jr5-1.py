@@ -1,0 +1,163 @@
+# -*- coding: shift-jis -*-
+
+"""
+˜HüˆêˆÓ‰º
+JR–kŠC“¹	”ŸŠÙ–{ü	0		”ŸŠÙ‰w	‚Í‚±‚¾‚Ä	 
+JR–kŠC“¹	”ŸŠÙ–{ü	3.4		ŒÜ—ÅŠs‰w	‚²‚è‚å‚¤‚©‚­	¡]·ü
+JR–kŠC“¹	”ŸŠÙ–{ü	8.3		‹j[‰w	‚«‚«‚å‚¤	 
+ :
+
+–kŠC“¹	JR–kŠC“¹	”ŸŠÙü	”ŸŠÙ‰w	‚Í‚±‚¾‚Ä	0	0	 	•ªŠò˜Hü	•ªŠò˜Hüƒtƒ‰ƒO	“¯–¼	“s‹æs“à
+
+- •ªŠò˜Hüƒtƒ‰ƒO‚ª‡‚Á‚Ä‚¢‚é‚©
+- “¯–¼ƒtƒ‰ƒO‚ª‡‚Á‚Ä‚¢‚é‚©
+- “s‹æs“à•Êˆê——•\¦
+
+D–ys“à	1
+å‘äs“à	2
+“s‹æ“à	3
+Rèü“à	4
+‰¡•ls“à	5
+–¼ŒÃ‰®s“à	6
+‹“ss“à	7
+‘åãs“à	8
+_ŒËs“à	9
+L“‡s“à	10
+–k‹ãBs“à	11
+•Ÿ‰ªs“à	12
+
+"""
+import sys
+import re
+from collections import defaultdict
+
+
+if 1 < len(sys.argv):
+  fn = sys.argv[1] 
+else:
+  fn = 'jr.txt'
+
+ln = 0
+toku = ([], [], [], [], [], [], [], [], [], [], [], [] )
+dupstations = []
+
+branch = defaultdict(str)
+h_eki = defaultdict(int)
+
+for lin in open(fn, 'r'):
+	ln += 1
+	if ln == 1: continue
+	linitems = lin.split('\t')
+	
+	eki = linitems[3]		# ‰w
+	h_eki[eki] += 1
+	train_lines = []
+	train_lines.append(linitems[2])    # ˜Hü 
+
+
+	i = int(linitems[9])
+	if i == 1:
+		dupstations.append(eki + '(' + linitems[0] + ');' + linitems[2])
+	elif i != 0:
+		print("{0}({1}) “¯–¼‰wƒtƒ‰ƒO•s³={2}".format(fn, ln, i))
+
+
+	i = int(linitems[10])
+	if len(toku) < i:
+		print("{0}({1}) “s‹æs“àƒR[ƒh•s³={2}".format(fn, ln, i))
+	elif 0 < i:
+		toku[i - 1].append("{0}({1})".format(linitems[3], linitems[2]))
+
+
+	if linitems[7].strip() != "":
+		train_lines.extend( linitems[7].split('/'))
+		if 1 != int(linitems[8]):
+			print("{0}({1}) •ªŠò˜Hüƒtƒ‰ƒO•s³(1‚Å‚ ‚é‚×‚«‚ª{2})".format(fn, ln, int(linitems[8])))
+	else:
+		if 0 != int(linitems[8]):
+			print("{0}({1}) •ªŠò˜Hüƒtƒ‰ƒO•s³(0‚Å‚ ‚é‚×‚«‚ª{2})".format(fn, ln, int(linitems[8])))
+
+	train_lines = [y for y in train_lines if y.strip() != '']
+	train_lines = list(map(lambda r:r.strip(), train_lines))
+	
+	train_lines.sort()									 # ˜HüA•ªŠò˜HüŒQ‚Ì”z—ñƒ\[ƒg
+	if branch[eki] != "":
+		branch[eki] += ","
+  
+	branch[eki] += "|".join(train_lines)   # Še‰w–ˆ‚É˜HüA•ªŠò˜HüŒQ‚ğ|‹æØ‚è‚Ì•¶š—ñ‚Å•Û
+
+
+print("–––“s‹æs“àˆê——–––")
+s = """
+D–ys“à
+å‘äs“à
+“s‹æ“à
+Rèü“à
+‰¡•ls“à
+–¼ŒÃ‰®s“à
+‹“ss“à
+‘åãs“à
+_ŒËs“à
+L“‡s“à
+–k‹ãBs“à
+•Ÿ‰ªs“à
+"""
+stoku = s.split('\n')[1:-1]
+
+for i in range(len(toku)):
+	print("***{0}***".format(stoku[i]))
+	for e in toku[i]:
+		print(e)
+
+
+# h_keys  Še‰w“oê‰ñ”‚ğ•Û
+# branch  Še‰wŠ‘®˜Hü‚ğ•Û
+#
+dup_e = []
+for e in h_eki.keys():			# Še‰w–ˆ
+	bra = branch[e].split(",")   # ‰w‚ª2‰ñˆÈã‚ ‚éê‡, bra‚ÉŒÂ”•ª‚ÌŠ‘®˜Hü‚Ì”z—ñ‚ª“ü‚é
+	bra = list(map(lambda r:r.split("|"), bra))  #bra.map! {|r| r.split("|") }
+	
+	if 1 < h_eki[e]: # •ªŠò‰w or 2“xˆÈã“oê‚µ‚½‰w e
+		if len(bra) != h_eki[e]:
+			print("!!!!!!!!!bug!!!!! #{0}:#{1}".format(e, len(bra)))
+
+		print("{0}({1})".format(e, h_eki[e]))   # ‰w–¼(“oê”)
+		other_station_lines = False
+		n_eki = 0
+		
+		for station_lines in bra:		# “¯–¼‰w–ˆ
+			n_eki += 1
+			if False == other_station_lines:
+				other_station_lines = station_lines
+				if len(station_lines) <= 0:
+					print("!!!!!bug!!!!!")
+				elif len(station_lines)  == 1:
+					print("  {0}‰w{1}/{2}: ‰w•¡”‚È‚Ì‚É•ªŠò‰w‚È‚µ(“¯–¼‰w)".format(e, n_eki, len(bra)))
+					dup_e.append(e)
+				elif len(station_lines) != h_eki[e]:
+					print("  {0}‰w{1}/{2}: •ªŠò˜Hü”‚Ì‘Šˆá {3}, {4}: {5}".format(e, n_eki, len(bra), len(station_lines), h_eki[e], '/'.join(station_lines)))
+
+			if other_station_lines != station_lines and len(station_lines) != 1:
+				print("  {0}‰w{1}/{2}: •ªŠò˜Hü•s‘«: {3}, {4}".format(e, n_eki, len(bra), '/'.join(other_station_lines), '/'.join(station_lines)))
+			elif len(station_lines) == 1:
+				print("               {0}".format('/'.join(station_lines)))
+
+	else: # ‰w1ŒÂ(•ªŠò‚È‚µ)
+		if 1 < len(bra[0]):
+			print("‰wˆêŒÂ‚È‚Ì‚É•ªŠò‰wH {0}:{1}->{2}".format(e, len(bra), bra[0]))
+
+
+print("–––“¯–¼‰wˆê——–––")
+dupstations.sort()
+for el in dupstations:
+	e = el[0:el.index('(')]
+	if e in dup_e:
+		print(el + '*')
+		del dup_e[dup_e.index(e)]
+	else:
+		print(el)
+		
+print('=======')
+for e in dup_e:
+	print(e)

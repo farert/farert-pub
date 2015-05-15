@@ -1,0 +1,31 @@
+jr.txt(465): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	Ž~•Ê‰w	‚â‚Þ‚×‚Â	25.8	28.4ckm
+jr.txt(466): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	’m°ŽÎ—¢‰w	‚µ‚ê‚Æ‚±‚µ‚á‚è	37.3	41ckm
+jr.txt(467): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	’†ŽÎ—¢‰w	‚È‚©‚µ‚á‚è	41.9	46.1ckm
+jr.txt(468): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	“ìŽÎ—¢‰w	‚Ý‚È‚Ý‚µ‚á‚è	44.1	48.5ckm
+jr.txt(469): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	´—¢’¬‰w	‚«‚æ‚³‚Æ‚¿‚å‚¤	49.2	54.1ckm
+jr.txt(470): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	ŽDŒ·‰w	‚³‚Á‚Â‚é	57	62.7ckm
+jr.txt(471): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	—Î‰w	‚Ý‚Ç‚è	65.3	71.8ckm
+jr.txt(472): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	ì“’‰·ò‰w	‚©‚í‚ä‚¨‚ñ‚¹‚ñ	79.8	87.8ckm
+jr.txt(473): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	”ü—¯˜a‰w	‚Ñ‚é‚í	87	95.7ckm
+jr.txt(474): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	–€Žü‰w	‚Ü‚µ‚ã‚¤	95.7	105.2ckm
+jr.txt(475): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	“ì’íŽq‹ü‰w	‚Ý‚È‚Ý‚Ä‚µ‚©‚ª	103.9	114.3ckm
+jr.txt(476): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	ˆé•ª“à‰w	‚¢‚»‚Ô‚ñ‚È‚¢	110.4	121.4ckm
+jr.txt(477): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	•W’ƒ‰w	‚µ‚×‚¿‚á	121	133.1ckm
+jr.txt(478): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	ŒÜ\Î‰w	‚²‚¶‚Á‚±‚­	129.5	142.4ckm
+jr.txt(479): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	ŠÀ‰w	‚©‚â‚Ê‚Ü	134.9	148.4ckm
+jr.txt(480): –kŠC“¹	JR–kŠC“¹	‹ú–Ôü	“„˜H‰w	‚Æ‚¤‚ë	141.1	156.1ckm
+jr.txt(2869): ŽOdŒ§	ˆÉ¨“S“¹	ˆÉ¨“S“¹	‰ÍŒ´“c	‚©‚í‚ç‚¾	0	\490	ˆÉ¨“S“¹		ckm
+jr.txt(2870): ŽOdŒ§	ˆÉ¨“S“¹	ˆÉ¨“S“¹	’Ã‰w	‚Â	22.3	\490	ˆÉ¨“S“¹		ckm
+jr.txt(4206): ‚’mŒ§	JRŽl‘	—\“yü	ŒEì‰w	‚­‚Ú‚©‚í	\200		“yŽ]ü		skm200@\200
+jr.txt(4207): ‚’mŒ§	JRŽl‘	—\“yü	Žáˆä‰w	‚í‚©‚¢	\200	0	“y²‚­‚ë‚µ‚¨“S“¹:’†‘ºü		skm200@\200
+jr.txt(4458): Ž­Ž™“‡Œ§	JR‹ãB	”ìŽF‚¨‚ê‚ñ‚¶“S“¹	o…‰w	‚¢‚¸‚Ý	65.6	\1660A\1440	‹ãBVŠ²ü		ckm
+jr.txt(4459): Ž­Ž™“‡Œ§	JR‹ãB	”ìŽF‚¨‚ê‚ñ‚¶“S“¹	ì“à‰w	‚¹‚ñ‚¾‚¢	116.9	\2,550	‹ãBVŠ²ü		ckm
+jr.txt(4989): 									skm null
+jr.txt(4990): 									skm null
+jr.txt(4991): 									skm null
+jr.txt(4992): 									skm null
+jr.txt(4993): 									skm null
+jr.txt(4994): 									skm null
+jr.txt(4995): 									skm null
+jr.txt(4996): 									skm null
+err=30 line / 4996

@@ -1,0 +1,89 @@
+DIM 発駅[] = "橋本", "東神奈川", "八王子", "橋本", "東神奈川", "八王子"
+DIM routes[] = _
+"相模線", "茅ヶ崎", "東海道線", "東神奈川", "横浜線", "橋本", "", _
+"東海道線", "川崎", "南武線", "立川", "中央東線", "八王子", "横浜線",  "東神奈川", "", _
+"中央東線", "立川", "南武線", "川崎", "東海道線", "東神奈川", "横浜線", "八王子", "", _
+"相模線", "茅ヶ崎", "東海道線", "東神奈川", "横浜線", "P終着駅", "橋本", "", _
+"東海道線", "川崎", "南武線", "立川", "中央東線", "八王子", "横浜線",  "P終着駅", "東神奈川", "", _
+"中央東線", "立川", "南武線", "川崎", "東海道線", "東神奈川", "横浜線", "P終着駅", "八王子", "", _
+""
+//#"", "", "", "", "", "", "", "", "", "", _
+
+
+DIM 着駅[] = "成瀬", "町田", "町田", "成瀬", "町田", "町田" 
+
+//#########################################
+
+i = 0
+is = 0
+ie = 0
+cnt = 0
+while true
+  cnt = cnt + 1
+  i_start = i
+  
+  if routes[i_start] = "" then break
+  
+  for j = i_start to length(routes) - 1
+    if routes[j] = "" then break
+  next
+
+  DIM route = slice(routes, i_start, j - 1)
+  i = j + 1
+  
+  
+  id = GETID("JR運賃計算", "#32770", -1)
+  CLKITEM(id, "X", CLK_BTN or CLK_LEFTCLK, True, 1)
+  sleep(1)
+  idd = GETID("alps_mfc", , 1)
+  if 0 < idd then CLKITEM(idd, "はい(Y)", CLK_BTN or CLK_LEFTCLK, True, 1)
+  sleep(1)
+  ルート指定(発駅[is], 着駅[ie], route)
+  sleep(1)
+  if msgbox(cnt + "回目、おわり、継続？", BTN_OK or BTN_CANCEL) = BTN_CANCEL then break
+  if is < length(発駅) - 1 then is = is + 1
+  if ie < length(着駅) - 1 then ie = ie + 1
+wend
+
+/////////////////////////////////////////////////////////
+PROCEDURE ルート指定(発駅, 着駅, ルート[])
+	mainid = GETID("JR運賃計算", "#32770", -1)
+	発駅選択(発駅)
+	if 着駅<>"" then 着駅選択(着駅)
+	mainid = GETID("JR運賃計算", "#32770", -1)
+	id = GETID("JR運賃計算", "#32770", -1)
+	SLEEP(1)
+	for i0 = 0 to length(ルート) - 1
+		if ルート[i0] = "" then break
+		if copy(ルート[i0], 1, 1) = "P" then
+		  CLKITEM(id, copy(ルート[i0], 2), CLK_BTN)
+		  continue
+		endif
+		CLKITEM(id, ルート[i0], CLK_LSTVEW or CLK_SHORT or CLK_LEFTCLK, True, 1)
+		CLKITEM(id, "+", CLK_BTN)
+	next
+FEND
+/////////////////////////////////////////////////////////
+PROCEDURE 発駅選択(駅名)
+	id = GETID("JR運賃計算", "#32770", -1)
+	CLKITEM(id, "…", CLK_BTN, True, 1)
+	id = GETID("発着駅指定", "#32770", -1)
+	SENDSTR(id, 駅名, 1, TRUE)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, 駅名, CLK_LIST or CLK_LEFTCLK, True, 4)
+	KBD(VK_DOWN)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+FEND
+/////////////////////////////////////////////////////////
+PROCEDURE 着駅選択(駅名)
+	id = GETID("JR運賃計算", "#32770", -1)
+	CLKITEM(id, "…", CLK_BTN, True, 2)
+	id = GETID("発着駅指定", "#32770", -1)
+	SENDSTR(id, 駅名, 1, TRUE)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, 駅名, CLK_LIST or CLK_LEFTCLK, True, 4)
+	KBD(VK_DOWN)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+	CLKITEM(id, "選択", CLK_BTN or CLK_LEFTCLK)
+FEND

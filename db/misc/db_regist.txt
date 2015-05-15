@@ -1,0 +1,25 @@
+
+jr.txt
+
+t_company
+t_
+
+“o˜^
+
+
+def trreg table, item
+  select exists
+  then
+    return id
+  else
+    insert
+    reutnr select id
+  end
+end
+
+
+
+
+
+
+
