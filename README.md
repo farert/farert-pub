@@ -19,6 +19,8 @@ mkdb.batを実行します。
 2015.4.8 訪問者ほぼ0/年ですので更新していませんです。
 
 2025.7.31追記
-開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
-https://farert.blogspot.com/2025/07/ios2507.html
+- 開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
+- ↑でリポジトリ公開してます（このリポジトリは古いのです）
+- このリポジトリは削除して、最新のリポジトリを2025.8.10には公開するようにしますのでお待ちください。
+- https://farert.blogspot.com/2025/07/ios2507.html
 
