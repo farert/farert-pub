@@ -17,3 +17,8 @@ mkdb.batを実行します。
 ※ DBの一般配布は取りやめました。個別にメールで送付します。
 
 2015.4.8 訪問者ほぼ0/年ですので更新していませんです。
+
+2025.7.31追記
+開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
+https://farert.blogspot.com/2025/07/ios2507.html
+
