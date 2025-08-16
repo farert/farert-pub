@@ -1,8 +1,0 @@
-\Debug\
-\ipch\
-.aps
-.filters
-.user
-.suo
-.sdf
-\Release\
