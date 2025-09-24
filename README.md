@@ -8,7 +8,7 @@ farert
 - Windows version, Android APK などをこちらにおきます
 
 - 開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
-- 最新のリポジトリは[こちら](https://github.com/farert)
+- 最新のリポジトリは[こちら](https://github.com/farert) ソースコード一式はこちらへ移動しています。
 
 ## SEE ALSO
 
