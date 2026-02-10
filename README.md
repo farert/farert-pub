@@ -9,6 +9,7 @@ farert
 
 - 開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
 - 最新のリポジトリは[こちら](https://github.com/farert) ソースコード一式はこちらへ移動しています。
+- 過去のバイナリは、[こちら](https://github.com/farert/farert-pub/releases)にありますが、さらに古いバイナリは、[こちら](https://github.com/farert/farert)にあります。
 
 ## SEE ALSO
 
