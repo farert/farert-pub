@@ -1,15 +1,15 @@
 farert
 ======
 
-# 経路運賃営業キロ計算アプリ Farert バイナリ保管庫
+# 経路運賃営業キロ計算アプリ Farert バージョン保管庫
 
 ## DESCRIPTION
 
-- Windows version, Android APK などをこちらにおきます
+- Windows version, ~~Android APK など~~ をこちらにおきます
+- 最新・過去バージョンは、[こちら](https://github.com/farert/farert-pub/releases)にありますが、さらに古いバージョンは、[こちら](https://github.com/farert/farert/tree/main/app/win_mfc/public-released)にあります。
 
 - 開発に協力していただけるかたは、[こちらのDiscordサーバー](https://discord.gg/NCvzgmn2Nd)で。
 - 最新のリポジトリは[こちら](https://github.com/farert) ソースコード一式はこちらへ移動しています。
-- 過去のバイナリは、[こちら](https://github.com/farert/farert-pub/releases)にありますが、さらに古いバイナリは、[こちら](https://github.com/farert/farert/tree/main/app/win_mfc/public-released)にあります。
 
 ## SEE ALSO
 
